@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var etDescription: EditText
     lateinit var btTakePicture: Button
+    lateinit var btLogOut: Button
     lateinit var btSubmit: Button
     lateinit var ivPicture: ImageView
 
@@ -35,8 +36,16 @@ class MainActivity : AppCompatActivity() {
 
         etDescription = findViewById(R.id.et_description)
         btTakePicture = findViewById(R.id.bt_take_picture)
+        btLogOut = findViewById(R.id.bt_log_out)
         btSubmit = findViewById(R.id.bt_submit)
         ivPicture = findViewById(R.id.iv_picture)
+
+        btLogOut.setOnClickListener {
+            ParseUser.logOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         btSubmit.setOnClickListener {
             //send post to server without img
