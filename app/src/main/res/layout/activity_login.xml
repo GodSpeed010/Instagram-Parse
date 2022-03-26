@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingHorizontal="100dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="150dp"
         app:srcCompat="@drawable/logo_instagram" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -64,7 +64,7 @@
         android:id="@+id/bt_sign_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue_instagram"
+        android:backgroundTint="@color/green_instagram"
         android:text="Sign Up"
         android:textColor="@color/white"
         android:textAllCaps="false" />

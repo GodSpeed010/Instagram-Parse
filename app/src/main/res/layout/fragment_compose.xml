@@ -6,17 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ComposeFragment">
 
-    <EditText
-        android:id="@+id/et_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/bt_take_picture"
         android:layout_width="wrap_content"
@@ -24,7 +13,7 @@
         android:text="Take Picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_description" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_picture"
@@ -36,6 +25,18 @@
         app:layout_constraintTop_toBottomOf="@+id/bt_take_picture"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <EditText
+        android:id="@+id/et_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_picture" />
+
     <Button
         android:id="@+id/bt_submit"
         android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_picture" />
+        app:layout_constraintTop_toBottomOf="@+id/et_description" />
 
     <Button
         android:id="@+id/bt_log_out"
