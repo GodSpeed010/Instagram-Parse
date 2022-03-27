@@ -88,9 +88,10 @@ class ComposeFragment : Fragment() {
             if (e != null) {
                 Log.e(TAG, "Error while saving post")
                 e.printStackTrace()
-                //todo show toast to show err
+                Toast.makeText(requireContext(), "Error sending post", Toast.LENGTH_SHORT).show()
             } else {
                 Log.i(TAG, "Successfully saved post")
+                Toast.makeText(requireContext(), "Sent Post!", Toast.LENGTH_SHORT).show()
                 //reset et and iv
             }
         }
