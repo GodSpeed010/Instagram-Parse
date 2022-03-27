@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.instagram.Post
 import com.example.instagram.PostAdapter
 import com.example.instagram.R
@@ -18,6 +19,7 @@ open class HomeFragment : Fragment() {
     lateinit var rvPosts: RecyclerView
     lateinit var adapter: PostAdapter
     var allPosts: MutableList<Post> = mutableListOf()
+    lateinit var swipeContainer: SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +32,7 @@ open class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        swipeContainer = view.findViewById(R.id.swipeContainer)
         rvPosts = view.findViewById(R.id.rvPosts)
         adapter = PostAdapter(requireContext(), allPosts)
 
@@ -37,6 +40,12 @@ open class HomeFragment : Fragment() {
         rvPosts.layoutManager = LinearLayoutManager(requireContext())
 
         queryPosts()
+
+        //refresh feed when swipeContainer is refreshed
+        swipeContainer.setOnRefreshListener {
+            adapter.clear()
+            queryPosts()
+        }
     }
 
     //Query for posts in our server
@@ -48,7 +57,7 @@ open class HomeFragment : Fragment() {
         // Return posts in descending order; newer posts appear 1st
         query.addDescendingOrder("createdAt")
 
-        //todo only return 20 most recentposts
+        //return 20 most recent posts
         query.limit = 20
 
         query.findInBackground { posts, e ->
@@ -58,11 +67,16 @@ open class HomeFragment : Fragment() {
             } else {
                 if (posts != null) {
                     for (post in posts) {
-                        Log.i(TAG,"Post: ${post.getDescription()}, username: ${post.getUser()?.username}")
+                        Log.i(
+                            TAG,
+                            "Post: ${post.getDescription()}, username: ${post.getUser()?.username}"
+                        )
                     }
 
                     allPosts.addAll(posts)
                     adapter.notifyDataSetChanged()
+                    //Signal that refreshing has finished
+                    swipeContainer.isRefreshing = false
                 }
             }
         }

@@ -34,6 +34,7 @@ class ProfileFragment : HomeFragment() {
 
                     allPosts.addAll(posts)
                     adapter.notifyDataSetChanged()
+                    swipeContainer.isRefreshing = false
                 }
             }
         }

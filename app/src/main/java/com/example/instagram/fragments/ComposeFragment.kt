@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.example.instagram.LoginActivity
 import com.example.instagram.Post
 import com.example.instagram.R
 import com.parse.ParseFile
@@ -52,13 +53,12 @@ class ComposeFragment : Fragment() {
         btSubmit = view.findViewById(R.id.bt_submit)
         ivPicture = view.findViewById(R.id.iv_picture)
 
-        //todo
-//        btLogOut.setOnClickListener {
-//            ParseUser.logOut()
-//            val intent = Intent(requireContext(), LoginActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
+        btLogOut.setOnClickListener {
+            ParseUser.logOut()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
 
         btSubmit.setOnClickListener {
             //send post to server without img
@@ -68,7 +68,7 @@ class ComposeFragment : Fragment() {
             if (photoFile != null) {
                 submitPost(description, user, photoFile!!)
             } else {
-                Toast.makeText((activity as AppCompatActivity), "No image was added", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "No image was added", Toast.LENGTH_SHORT).show()
             }
         }
 

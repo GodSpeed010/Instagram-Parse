@@ -61,13 +61,14 @@ class LoginActivity : AppCompatActivity() {
         // Create the ParseUser
         val user = ParseUser()
 
-// Set fields for the user to be created
+        // Set fields for the user to be created
         user.setUsername(username)
         user.setPassword(password)
 
         user.signUpInBackground { e ->
             if (e == null) {
-                //todo navigate to mainactivity
+                //navigate to mainactivity
+                loginUser(username, password)
             } else {
                 e.printStackTrace()
             }

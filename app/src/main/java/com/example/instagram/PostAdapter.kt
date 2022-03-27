@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 
 class PostAdapter(
     val context: Context,
-    val posts: List<Post>
+    val posts: MutableList<Post>
 ) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostAdapter.ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false)
@@ -25,6 +25,11 @@ class PostAdapter(
 
     override fun getItemCount(): Int {
         return posts.size
+    }
+
+    fun clear() {
+        posts.clear()
+        notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
